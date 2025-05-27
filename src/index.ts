@@ -1,5 +1,9 @@
+import { config } from 'dotenv';
 import express from 'express';
+
 import type { Request, Response } from 'express';
+config();
+
 const PORT = process.env.PORT || 8080;
 
 const app = express();
