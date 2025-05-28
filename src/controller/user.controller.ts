@@ -1,26 +1,52 @@
-import type { Request, Response } from 'express';
+import User from '../models/user.model.js';
 
-export const GetUsers = async (req: Request, res: Response) => {
+import type { NextFunction, Request, Response } from 'express';
+
+export const GetUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
+    const users = await User.find({});
+
     res.status(200).json({
-      message: 'Users fetched successfully',
+      success: true,
+      message: 'users fetched successfully',
+      data: users,
     });
   } catch (error) {
     console.error('Error fetching users:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    next(error);
   }
 };
 
-export const GetUserById = async (req: Request, res: Response) => {
+export const GetUserById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const userId = req.params.id;
-    // Simulate fetching user by ID
+
+    const user = await User.findById(userId).select('-password');
+
+    if (!user) {
+      const error = new Error('User not found') as Error & {
+        statusCode: number;
+      };
+      error.statusCode = 404;
+      throw error;
+    }
+
     res.status(200).json({
+      success: true,
       message: `User with ID ${userId} fetched successfully`,
+      data: user,
     });
   } catch (error) {
     console.error('Error fetching user by ID:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    next(error);
   }
 };
 export const CreateUser = async (req: Request, res: Response) => {
