@@ -1,12 +1,13 @@
 import express from 'express';
 
-const router = express.Router();
-
 import * as UserController from '../controller/user.controller.js';
+import { authorize } from '../middleware/auth.middleware.js';
+
+const router = express.Router();
 
 router.get('/', UserController.GetUsers);
 
-router.get('/:id', UserController.GetUserById);
+router.get('/:id', authorize, UserController.GetUserById);
 
 router.post('/', UserController.CreateUser);
 
