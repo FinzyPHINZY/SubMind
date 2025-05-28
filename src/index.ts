@@ -1,9 +1,10 @@
+import cookieParser from 'cookie-parser';
 import { config } from 'dotenv';
 import express from 'express';
 import morgan from 'morgan';
-import cookieParser from 'cookie-parser';
 
 import { connectDb } from './config/DB.js';
+import arcjetMiddleware from './middleware/arcjet.middleware.js';
 import errorMiddleware from './middleware/error.middleware.js';
 import authRouter from './routes/auth.routes.js';
 import subscriptionRouter from './routes/subscription.routes.js';
@@ -20,6 +21,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(arcjetMiddleware);
 
 app.use(morgan('tiny'));
 
