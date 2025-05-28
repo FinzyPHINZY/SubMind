@@ -9,8 +9,9 @@ const aj = arcjet({
       mode: 'LIVE',
       allow: [
         'CATEGORY:SEARCH_ENGINE', // Google, Bing, etc
-        'CATEGORY:MONITOR', // Uptime monitoring services
-        'CATEGORY:PREVIEW', // Link previews e.g. Slack, Discord
+        'CURL',
+        // 'CATEGORY:MONITOR', // Uptime monitoring services
+        // 'CATEGORY:PREVIEW', // Link previews e.g. Slack, Discord
       ],
     }),
     tokenBucket({

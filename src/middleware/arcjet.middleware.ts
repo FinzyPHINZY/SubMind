@@ -8,14 +8,19 @@ const arcjetMiddleware = async (
 ): Promise<any> => {
   try {
     const decision = await arcjet.protect(req, { requested: 1 });
-    console.log('Arcjet decision', decision);
+    // console.log('Arcjet decision', decision);
 
-    if (decision.isDenied) {
+    // console.log(decision.isDenied());
+    if (decision.isDenied()) {
       if (decision.reason.isRateLimit())
-        res.status(429).json({ success: false, error: 'Rate limit exceeded' });
+        return res
+          .status(429)
+          .json({ success: false, error: 'Rate limit exceeded' });
 
       if (decision.reason.isBot())
-        res.status(403).json({ success: false, error: 'No bots allowed' });
+        return res
+          .status(403)
+          .json({ success: false, error: 'No bots allowed' });
 
       return res.status(403).json({ success: false, error: 'Access denied' });
     }
