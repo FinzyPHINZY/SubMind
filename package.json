@@ -13,6 +13,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.6.0",
   "dependencies": {
+    "@arcjet/inspect": "1.0.0-beta.7",
+    "@arcjet/node": "1.0.0-beta.7",
     "@types/jsonwebtoken": "^9.0.9",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
