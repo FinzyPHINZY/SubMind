@@ -1,14 +1,15 @@
 import express from 'express';
 
 import * as SubscriptionController from '../controller/susbscription.controller.js';
+import { authorize } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 
-router.get('/', SubscriptionController.GetSubscriptions);
+router.post('/', authorize, SubscriptionController.CreateSubscription);
+
+router.get('/', authorize, SubscriptionController.GetUserSubscriptions);
 
 router.get('/:id', SubscriptionController.GetSubscriptionById);
-
-router.post('/', SubscriptionController.CreateSubscription);
 
 router.put('/:id', SubscriptionController.UpdateSubscription);
 

@@ -9,6 +9,7 @@ import errorMiddleware from './middleware/error.middleware.js';
 import authRouter from './routes/auth.routes.js';
 import subscriptionRouter from './routes/subscription.routes.js';
 import userRouter from './routes/user.routes.js';
+import workflowRouter from './routes/workflow.routes.js';
 
 import type { Request, Response } from 'express';
 
@@ -32,6 +33,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/subscriptions', subscriptionRouter);
+app.use('/api/v1/workflows', workflowRouter);
 
 app.use(errorMiddleware);
 
